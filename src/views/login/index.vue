@@ -3,16 +3,21 @@
     <el-row>
       <el-col :span="12" :xs="0"></el-col>
       <el-col :span="12" :xs="24">
-        <el-form class="login_form">
+        <el-form
+          class="login_form"
+          :model="loginForm"
+          :rules="rules"
+          ref="loginForms"
+        >
           <h1>Hello</h1>
           <h2>欢迎来到硅谷甄选</h2>
-          <el-form-item>
+          <el-form-item prop="username">
             <el-input
               :prefix-icon="User"
               v-model="loginForm.username"
             ></el-input>
           </el-form-item>
-          <el-form-item>
+          <el-form-item prop="password">
             <el-input
               type="password"
               :prefix-icon="Lock"
@@ -42,6 +47,9 @@ import { User, Lock } from '@element-plus/icons-vue'
 import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { ElNotification } from 'element-plus'
+// 引入获取当前时间的函数
+import { getTime } from '@/utils/time'
+
 // 引用用户相关的小仓库
 import useUserStore from '@/store/modules/user'
 
@@ -49,6 +57,8 @@ import useUserStore from '@/store/modules/user'
 let loginForm = reactive({ username: 'admin', password: '111111' })
 
 let userStore = useUserStore()
+// 获取el-form组件
+let loginForms = ref()
 // 获取路由器
 let $router = useRouter()
 
@@ -57,6 +67,9 @@ let loading = ref(false)
 
 // 登录按钮的回调
 const login = async () => {
+  // 要保证全部表单项校验通过后再发请求
+  await loginForms.value.validate()
+
   // 加载效果: 开始加载
   loading.value = true
   // 点击登录按钮以后干什么？
@@ -72,7 +85,8 @@ const login = async () => {
     // 登录成功的提示信息
     ElNotification({
       type: 'success',
-      message: '登录成功',
+      message: '欢迎回来',
+      title: `Hi, ${getTime()}好`,
     })
     // 登录成功，加载效果也消失
     loading.value = false
@@ -85,6 +99,34 @@ const login = async () => {
       message: error.message,
     })
   }
+}
+
+// 定义表单校验需要配置对象
+const rules = {
+  username: [
+    // 规则对象属性:
+    // required: 代表这个字段务必要校验的
+    // min: 文本长度至少多少位
+    // max: 文本长度最多多少位
+    // message: 错误的提示信息
+    // trigger: 出发校验表单的时机 change -> 文本发生变化时出发校验，blue -> 失去焦点时触发校验
+    {
+      required: true,
+      min: 6,
+      max: 10,
+      message: '账号长度在6位到10位之间',
+      trigger: 'change',
+    },
+  ],
+  password: [
+    {
+      required: true,
+      min: 6,
+      max: 15,
+      message: '密码长度在6位到15位之间',
+      trigger: 'change',
+    },
+  ],
 }
 </script>
 
