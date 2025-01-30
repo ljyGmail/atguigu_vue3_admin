@@ -1,24 +1,9 @@
 <template>
-  <div class="box">
-    <h1>我是App</h1>
+  <div>
+    <h1>我新增一个标题</h1>
   </div>
 </template>
 
-<script setup lang="ts">
-for (let i = 0; i < 100; i++) 
+<script setup lang="ts"></script>
 
-{
-  console.log(i);
-}
-</script>
-
-<style scoped>
-.box {
-  width: 600px;
-  height: 400px;
-  background: black;
-  h1 {
-    color: white;
-  }
-}
-</style>
+<style scoped></style>
