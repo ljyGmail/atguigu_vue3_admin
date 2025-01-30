@@ -1,17 +1,22 @@
 <template>
   <div class="layout_container">
     <!-- 左侧菜单 -->
-    <div class="layout_slider">123</div>
+    <div class="layout_slider">
+      <Logo></Logo>
+    </div>
     <!-- 顶部导航 -->
     <div class="layout_tabbar">456</div>
     <!-- 内容展示区域 -->
     <div class="layout_main">
-        <p style="height: 10000px; background-color: red;">我是一个段落</p>
+      <p style="height: 10000px; background-color: red">我是一个段落</p>
     </div>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+// 引入左侧菜单logo子组件
+import Logo from './logo/index.vue'
+</script>
 
 <style scoped lang="scss">
 .layout_container {
