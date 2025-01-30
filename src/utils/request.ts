@@ -3,7 +3,7 @@ import axios from 'axios'
 import { ElMessage } from 'element-plus'
 
 // 第一步: 利用axios对象的create方法，去创建一个axios实例(其他的配置：基础路径，超时的时间)
-let request = axios.create({
+const request = axios.create({
   // 基础路径
   baseURL: import.meta.env.VITE_APP_BASE_API, // 基础路径上会携带/api
   timeout: 5000, // 超时时间的设置
@@ -27,7 +27,7 @@ request.interceptors.response.use(
     // 定义一个变量: 存醋网络错误信息
     let message = ''
     // http状态码
-    let status = error.response.status
+    const status = error.response.status
     switch (status) {
       case 401:
         message = 'TOKEN过期'
