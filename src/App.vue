@@ -5,7 +5,11 @@
 </template>
 
 <script setup lang="ts">
-const str = '我爱你祖国'
+for(let i=0;i<100;i++){
+  console.log(i);
+
+
+}
 </script>
 
 <style scoped>
