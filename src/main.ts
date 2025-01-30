@@ -7,5 +7,13 @@ const fun = () => {
   console.log('这是没有格式化的代码')
 }
 
-let str="我是祖国的老花骨朵";
+for(let i=0;i<10;i++)
+  
+  
+  
+  {
+  console.log(i);
+  
+}
+
 fun()
