@@ -101,6 +101,26 @@ const login = async () => {
   }
 }
 
+// 自定义校验规则函数
+const validateUsername = (rule: any, value: any, callback: any) => {
+  // rule: 校验规则对象
+  // value: 表单元素文本内容
+  // callback函数: 如果符合条件，调用callback放行通过即可
+  //             如果不符合条件，调用callback，注入错误提示信息
+  if (value.length >= 5) {
+    callback()
+  } else {
+    callback(new Error('账号长度至少5位'))
+  }
+}
+
+const validatePassword = (rule: any, value: any, callback: any) => {
+  if (value.length >= 6) {
+    callback()
+  } else {
+    callback(new Error('密码长度至少6位'))
+  }
+}
 // 定义表单校验需要配置对象
 const rules = {
   username: [
@@ -110,6 +130,7 @@ const rules = {
     // max: 文本长度最多多少位
     // message: 错误的提示信息
     // trigger: 出发校验表单的时机 change -> 文本发生变化时出发校验，blue -> 失去焦点时触发校验
+    /*
     {
       required: true,
       min: 6,
@@ -117,8 +138,11 @@ const rules = {
       message: '账号长度在6位到10位之间',
       trigger: 'change',
     },
+    */
+    { trigger: 'change', validator: validateUsername },
   ],
   password: [
+    /*
     {
       required: true,
       min: 6,
@@ -126,6 +150,8 @@ const rules = {
       message: '密码长度在6位到15位之间',
       trigger: 'change',
     },
+    */
+    { trigger: 'change', validator: validatePassword },
   ],
 }
 </script>
