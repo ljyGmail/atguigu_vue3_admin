@@ -20,6 +20,7 @@
       <el-menu-item
         :index="item.children[0].path"
         v-if="!item.children[0].meta.hidden"
+        @click="goRoute"
       >
         <el-icon>
           <component :is="item.children[0].meta.icon"></component>
@@ -48,15 +49,20 @@
 <script setup lang="ts">
 // 获取父组件传递过来的全部路由数组
 defineProps(['menuList'])
+
+import { useRouter } from 'vue-router'
+// 获取路由器对象
+const $router = useRouter()
+
+// 点击菜单的回调
+const goRoute = (vc: any) => {
+  // 路由跳转
+  $router.push(vc.index)
+}
 </script>
 <script lang="ts">
 export default {
   name: 'Menu',
-}
-
-// 点击菜单的回调
-const goRoute = (vc: any) => {
-  console.log(vc.index)
 }
 </script>
 
