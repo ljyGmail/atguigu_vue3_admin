@@ -36,5 +36,7 @@ app.use(globalComponent)
 // 注册模版路由
 app.use(router)
 
+import './permission'
+
 // 将应用挂载到挂载点上
 app.mount('#app')
