@@ -1,10 +1,7 @@
 <template>
   <div class="layout_container">
     <!-- 左侧菜单 -->
-    <div
-      class="layout_slider"
-      :class="{ fold: layoutSettingsStore.fold ? true : false }"
-    >
+    <div class="layout_slider">
       <Logo></Logo>
       <!-- 滚动组件 -->
       <el-scrollbar class="scrollbar">
@@ -81,10 +78,6 @@ let $route = useRoute()
       .el-menu {
         border-right: none;
       }
-    }
-
-    &.fold {
-      width: $base-menu-min-width;
     }
   }
 
